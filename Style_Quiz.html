@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior Design Style Quiz</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #a89379; /* Sophisticated gold/tan */
+            --bg: #f9f9f9;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #quiz-container {
+            background: var(--white);
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #eee;
+            margin-bottom: 30px;
+            border-radius: 2px;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .question-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 50%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            padding: 15px;
+            border: 1px solid #ddd;
+            background: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background-color: #fdfbf8;
+        }
+
+        #result-area { display: none; }
+        
+        .fade-in { animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    
+    <div id="question-content" class="fade-in">
+        <div class="image-container">
+            <img id="q-image" src="" alt="Interior Design Style">
+        </div>
+        <h2 id="q-text" class="question-title"></h2>
+        <div id="options" class="options-grid"></div>
+    </div>
+
+    <div id="result-area" class="fade-in">
+        <h2>Your Style Profile is Ready!</h2>
+        <p>Based on your choices, we've curated a vision for your space.</p>
+        <button class="option-btn" style="background: var(--accent); color: white; border: none;" onclick="location.reload()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            question: "Which space are you redesigning?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz1.jpg",
+            options: ["Living Room", "Bedroom", "Kitchen", "Office", "Entire Home"]
+        },
+        {
+            question: "Which color palette do you prefer most?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz2.jpg",
+            options: ["Neutral tones", "Warm colors", "Cool colors", "Bold & vibrant", "Pastels"]
+        },
+        {
+            question: "How do you want your space to feel?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz3.jpg",
+            options: ["Calm and relaxing", "Energetic and lively", "Warm and welcoming", "Stylish and impressive"]
+        },        
+        {
+            question: "Which space are you redesigning?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz4.jpg",
+            options: ["Living Room", "Bedroom", "Kitchen", "Office", "Entire Home"]
+        },
+        {
+            question: "Which color palette do you prefer most?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz5.jpg",
+            options: ["Neutral tones", "Warm colors", "Cool colors", "Bold & vibrant", "Pastels"]
+        },
+        {
+            question: "How do you want your space to feel?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz6.jpg",
+            options: ["Calm and relaxing", "Energetic and lively", "Warm and welcoming", "Stylish and impressive"]
+        },    
+        {
+            question: "Which space are you redesigning?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz7.jpg",
+            options: ["Living Room", "Bedroom", "Kitchen", "Office", "Entire Home"]
+        },
+        {
+            question: "Which color palette do you prefer most?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz8.jpg",
+            options: ["Neutral tones", "Warm colors", "Cool colors", "Bold & vibrant", "Pastels"]
+        },
+        {
+            question: "How do you want your space to feel?",
+            image: "C:\\Users\\DELL\\Documents\\Sakura_Interior\\Style_Quiz\\quiz9.jpg",
+            options: ["Calm and relaxing", "Energetic and lively", "Warm and welcoming", "Stylish and impressive"]
+        },
+        
+        // Add all your remaining questions here following this format
+    ];
+
+    let currentQuestion = 0;
+    const userAnswers = [];
+
+    function loadQuestion() {
+        const qContent = document.getElementById('question-content');
+        const qText = document.getElementById('q-text');
+        const qImage = document.getElementById('q-image');
+        const optionsContainer = document.getElementById('options');
+        const progressFill = document.getElementById('progress-fill');
+
+        // Reset animation
+        qContent.classList.remove('fade-in');
+        void qContent.offsetWidth; 
+        qContent.classList.add('fade-in');
+
+        // Update progress
+        progressFill.style.width = ((currentQuestion) / quizData.length * 100) + "%";
+
+        const currentData = quizData[currentQuestion];
+        qText.innerText = currentData.question;
+        qImage.src = currentData.image;
+        optionsContainer.innerHTML = "";
+
+        currentData.options.forEach(option => {
+            const btn = document.createElement('button');
+            btn.innerText = option;
+            btn.className = 'option-btn';
+            btn.onclick = () => selectOption(option);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectOption(answer) {
+        userAnswers.push({
+            question: quizData[currentQuestion].question,
+            answer: answer
+        });
+
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function showResults() {
+        document.getElementById('question-content').style.display = 'none';
+        document.getElementById('progress-fill').style.width = "100%";
+        document.getElementById('result-area').style.display = 'block';
+        console.log("User's Style Profile:", userAnswers);
+        // Here you would typically send userAnswers to your email or database
+    }
+
+    // Initialize the quiz
+    loadQuestion();
+</script>
+
+</body>
+</html>
