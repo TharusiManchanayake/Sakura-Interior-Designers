@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura Interior Designs | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:linear-gradient(to right,#fdfbfb,#ebedee);
+    color:#333;
+}
+
+header{
+    background:linear-gradient(to right,#f8c8dc,#e1bee7);
+    padding:60px 20px;
+    text-align:center;
+    color:#6a1b4d;
+}
+
+header h1{
+    font-size:3rem;
+}
+
+header p{
+    margin-top:10px;
+    font-size:1.1rem;
+}
+
+.main-container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:40px;
+    padding:60px 8%;
+}
+
+.section{
+    flex:1;
+    min-width:320px;
+}
+
+.section h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#6a1b4d;
+    font-size:2rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#ffffff;
+    padding:20px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    transition:0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    background:#fce4ec;
+}
+
+.card a{
+    text-decoration:none;
+    color:#6a1b4d;
+    font-weight:600;
+    font-size:1rem;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#f8c8dc;
+    color:#6a1b4d;
+    margin-top:40px;
+}
+
+@media(max-width:900px){
+    .main-container{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Our Portfolio</h1>
+    <p>Explore Designs By Room & By Style</p>
+</header>
+
+<div class="main-container">
+
+    <!-- By Room Section FIRST (Left Side) -->
+    <section class="section">
+        <h2>By Room</h2>
+        <div class="grid">
+            <div class="card"><a href="bedroom.html">Bedroom</a></div>
+            <div class="card"><a href="diningroom.html">Dining Room</a></div>
+            <div class="card"><a href="homeoffice.html">Home Office</a></div>
+            <div class="card"><a href="livingroom.html">Living Room</a></div>
+            <div class="card"><a href="nursery.html">Nursery</a></div>
+            <div class="card"><a href="patio.html">Patio</a></div>
+        </div>
+    </section>
+
+    <!-- By Style Section SECOND (Right Side) -->
+    <section class="section">
+        <h2>By Style</h2>
+        <div class="grid">
+            <div class="card"><a href="art_deco.html">Art Deco</a></div>
+            <div class="card"><a href="bohemian.html">Bohemian</a></div>
+            <div class="card"><a href="coastal.html">Coastal</a></div>
+            <div class="card"><a href="contemporary.html">Contemporary</a></div>
+            <div class="card"><a href="eclectic.html">Eclectic</a></div>
+            <div class="card"><a href="farmhouse.html">Farmhouse</a></div>
+            <div class="card"><a href="galm.html">Glam</a></div>
+            <div class="card"><a href="industrial.html">Industrial</a></div>
+            <div class="card"><a href="japandi.html">Japandi</a></div>
+            <div class="card"><a href="mid-cenctury-modern.html">Mid-Century Modern</a></div>
+            <div class="card"><a href="minimalist.html">Minimalist</a></div>
+            <div class="card"><a href="modern.html">Modern</a></div>
+            <div class="card"><a href="scandinavian.html">Scandinavian</a></div>
+            <div class="card"><a href="traditional.html">Traditional</a></div>
+            <div class="card"><a href="transitional.html">Transitional</a></div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    © 2026 Sakura Interior Designs | Elegant Living Spaces
+</footer>
+
+</body>
+</html>
