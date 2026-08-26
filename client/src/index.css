@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FAF7F2;
+  --color-blush: #E8A0A0;
+  --color-blush-dark: #CE7C7C;
+  --color-charcoal: #2E2A27;
+  --color-sage: #A8B5A0;
+  --color-stone: #D9D2C7;
+}
+
+body {
+  margin: 0;
+}
