@@ -11,6 +11,8 @@ import Booking from "./pages/Booking";
 import Shop from "./pages/shop/Shop";
 import Furniture from "./pages/shop/Furniture";
 import FurnitureCategory from "./pages/shop/FurnitureCategory";
+import Lighting from "./pages/shop/Lighting";
+import LightingCategory from "./pages/shop/LightingCategory";
 
 function Placeholder({ title }) {
   return (
@@ -43,6 +45,8 @@ function App() {
   <Route path="/shop" element={<Shop />} />
   <Route path="/shop/furniture" element={<Furniture />} />
   <Route path="/shop/furniture/:slug" element={<FurnitureCategory />} />
+  <Route path="/shop/lighting" element={<Lighting />} />
+  <Route path="/shop/lighting/:slug" element={<LightingCategory />} />
   <Route path="/shop/:category" element={<Placeholder title="Coming Soon" />} />
 
   <Route path="*" element={<Placeholder title="Page Not Found" />} />
