@@ -17,6 +17,8 @@ import Decor from "./pages/shop/Decor";
 import DecorCategory from "./pages/shop/DecorCategory";
 import Textiles from "./pages/shop/Textiles";
 import TextilesCategory from "./pages/shop/TextilesCategory";
+import WallDecor from "./pages/shop/WallDecor";
+import WallDecorCategory from "./pages/shop/WallDecorCategory";
 
 
 function Placeholder({ title }) {
@@ -56,7 +58,11 @@ function App() {
   <Route path="/shop/decor/:slug" element={<DecorCategory />} />
   <Route path="/shop/:category" element={<Placeholder title="Coming Soon" />} />
   <Route path="/shop/textiles" element={<Textiles />} />
-<Route path="/shop/textiles/:slug" element={<TextilesCategory />} />
+  <Route path="/shop/textiles/:slug" element={<TextilesCategory />} />
+  <Route path="/shop/textiles" element={<Textiles />} />
+  <Route path="/shop/textiles/:slug" element={<TextilesCategory />} />
+  <Route path="/shop/wall-decor" element={<WallDecor />} />
+  <Route path="/shop/wall-decor/:slug" element={<WallDecorCategory />} />
 
   <Route path="*" element={<Placeholder title="Page Not Found" />} />
 </Routes>

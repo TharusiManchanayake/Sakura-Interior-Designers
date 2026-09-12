@@ -163,3 +163,40 @@ export function getTextilesProducts(subcategory) {
   }
   return products;
 }
+
+// Wall Decor — same bulk-import pattern
+const wallDecorImages = import.meta.glob(
+  "../assets/shop/walldecor/*/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+
+function getWallDecorImage(folder, prefix, index, ext = "jpg") {
+  const key = `../assets/shop/walldecor/${folder}/${prefix}${index}.${ext}`;
+  return wallDecorImages[key];
+}
+
+export const wallDecorSubcategories = [
+  { slug: "artwork", name: "Artwork", folder: "artwork", prefix: "artwork" },
+  { slug: "decorative-mirrors", name: "Decorative Mirrors", folder: "decorativemirrors", prefix: "decorativemirror" },
+  { slug: "photography", name: "Photography", folder: "photography", prefix: "photography" },
+  { slug: "prints", name: "Prints", folder: "prints", prefix: "print" },
+  { slug: "wall-panels", name: "Wall Panels", folder: "wallpanels", prefix: "wallpanel" },
+];
+
+export function getWallDecorProducts(subcategory) {
+  if (!subcategory.folder) return [];
+
+  const products = [];
+  for (let i = 1; i <= 10; i++) {
+    const image = getWallDecorImage(subcategory.folder, subcategory.prefix, i);
+    if (!image) continue;
+
+    products.push({
+      id: `${subcategory.slug}-${i}`,
+      name: `${subcategory.name.split(" ")[0]} Design ${String(i).padStart(2, "0")}`,
+      price: 20 + i * 6,
+      image,
+    });
+  }
+  return products;
+}
