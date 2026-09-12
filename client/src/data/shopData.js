@@ -200,3 +200,39 @@ export function getWallDecorProducts(subcategory) {
   }
   return products;
 }
+
+// Plants & Planters — same bulk-import pattern
+const plantsImages = import.meta.glob(
+  "../assets/shop/plants/*/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+
+function getPlantsImage(folder, prefix, index, ext = "jpg") {
+  const key = `../assets/shop/plants/${folder}/${prefix}${index}.${ext}`;
+  return plantsImages[key];
+}
+
+export const plantsSubcategories = [
+  { slug: "artificial-greenery", name: "Artificial Greenery", folder: "artificialgreenary", prefix: "artificialgreenary" },
+  { slug: "indoor-plants", name: "Indoor Plants", folder: "indoorplants", prefix: "indoorplant" },
+  { slug: "planters", name: "Planters", folder: "planters", prefix: "planter" },
+  { slug: "plant-stands", name: "Plant Stands", folder: "plantstands", prefix: "plantstand" },
+];
+
+export function getPlantsProducts(subcategory) {
+  if (!subcategory.folder) return [];
+
+  const products = [];
+  for (let i = 1; i <= 10; i++) {
+    const image = getPlantsImage(subcategory.folder, subcategory.prefix, i);
+    if (!image) continue;
+
+    products.push({
+      id: `${subcategory.slug}-${i}`,
+      name: `${subcategory.name.split(" ")[0]} Design ${String(i).padStart(2, "0")}`,
+      price: 20 + i * 6,
+      image,
+    });
+  }
+  return products;
+}
