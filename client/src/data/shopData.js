@@ -86,3 +86,43 @@ export function getLightingProducts(subcategory) {
 
   return products;
 }
+
+// Décor — same bulk-import pattern
+const decorImages = import.meta.glob(
+  "../assets/shop/decor/*/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+
+function getDecorImage(folder, prefix, index, ext = "jpg") {
+  const key = `../assets/shop/decor/${folder}/${prefix}${index}.${ext}`;
+  return decorImages[key];
+}
+
+export const decorSubcategories = [
+  { slug: "baskets", name: "Baskets", folder: "baskets", prefix: "basket" },
+  { slug: "candles-holders", name: "Candles & Holders", folder: "candles&holders", prefix: "candle" },
+  { slug: "clocks", name: "Clocks", folder: "clocks", prefix: "clock" },
+  { slug: "decorative-objects", name: "Decorative Objects", folder: "decorativeObjects", prefix: "decoobject" },
+  { slug: "mirrors", name: "Mirrors", folder: "mirrors", prefix: "mirror" },
+  { slug: "sculptures", name: "Sculptures", folder: "sculptures", prefix: "sculpture" },
+  { slug: "trays", name: "Trays", folder: "trays", prefix: "tray" },
+  { slug: "vases", name: "Vases", folder: "vases", prefix: "vase" },
+];
+
+export function getDecorProducts(subcategory) {
+  if (!subcategory.folder) return [];
+
+  const products = [];
+  for (let i = 1; i <= 10; i++) {
+    const image = getDecorImage(subcategory.folder, subcategory.prefix, i);
+    if (!image) continue;
+
+    products.push({
+      id: `${subcategory.slug}-${i}`,
+      name: `${subcategory.name.split(" ")[0]} Design ${String(i).padStart(2, "0")}`,
+      price: 25 + i * 8,
+      image,
+    });
+  }
+  return products;
+}

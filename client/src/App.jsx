@@ -13,6 +13,9 @@ import Furniture from "./pages/shop/Furniture";
 import FurnitureCategory from "./pages/shop/FurnitureCategory";
 import Lighting from "./pages/shop/Lighting";
 import LightingCategory from "./pages/shop/LightingCategory";
+import Decor from "./pages/shop/Decor";
+import DecorCategory from "./pages/shop/DecorCategory";
+
 
 function Placeholder({ title }) {
   return (
@@ -47,6 +50,8 @@ function App() {
   <Route path="/shop/furniture/:slug" element={<FurnitureCategory />} />
   <Route path="/shop/lighting" element={<Lighting />} />
   <Route path="/shop/lighting/:slug" element={<LightingCategory />} />
+  <Route path="/shop/decor" element={<Decor />} />
+  <Route path="/shop/decor/:slug" element={<DecorCategory />} />
   <Route path="/shop/:category" element={<Placeholder title="Coming Soon" />} />
 
   <Route path="*" element={<Placeholder title="Page Not Found" />} />
