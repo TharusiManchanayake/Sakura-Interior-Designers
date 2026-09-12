@@ -126,3 +126,40 @@ export function getDecorProducts(subcategory) {
   }
   return products;
 }
+
+// Textiles — same bulk-import pattern
+const textilesImages = import.meta.glob(
+  "../assets/shop/textiles/*/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+
+function getTextilesImage(folder, prefix, index, ext = "jpg") {
+  const key = `../assets/shop/textiles/${folder}/${prefix}${index}.${ext}`;
+  return textilesImages[key];
+}
+
+export const textilesSubcategories = [
+  { slug: "blankets", name: "Blankets", folder: "blankets", prefix: "blanket" },
+  { slug: "curtains", name: "Curtains", folder: "curtains", prefix: "curtain" },
+  { slug: "cushions", name: "Cushions", folder: "cushions", prefix: "cushion" },
+  { slug: "rugs", name: "Rugs", folder: "rugs", prefix: "rug" },
+  { slug: "throws", name: "Throws", folder: "throws", prefix: "throw" },
+];
+
+export function getTextilesProducts(subcategory) {
+  if (!subcategory.folder) return [];
+
+  const products = [];
+  for (let i = 1; i <= 10; i++) {
+    const image = getTextilesImage(subcategory.folder, subcategory.prefix, i);
+    if (!image) continue;
+
+    products.push({
+      id: `${subcategory.slug}-${i}`,
+      name: `${subcategory.name.split(" ")[0]} Design ${String(i).padStart(2, "0")}`,
+      price: 20 + i * 6,
+      image,
+    });
+  }
+  return products;
+}
