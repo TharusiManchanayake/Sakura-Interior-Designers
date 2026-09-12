@@ -21,6 +21,8 @@ import WallDecor from "./pages/shop/WallDecor";
 import WallDecorCategory from "./pages/shop/WallDecorCategory";
 import Plants from "./pages/shop/Plants";
 import PlantsCategory from "./pages/shop/PlantsCategory";
+import Accessories from "./pages/shop/Accessories";
+import AccessoriesCategory from "./pages/shop/AccessoriesCategory";
 
 
 function Placeholder({ title }) {
@@ -66,7 +68,9 @@ function App() {
   <Route path="/shop/wall-decor" element={<WallDecor />} />
   <Route path="/shop/wall-decor/:slug" element={<WallDecorCategory />} />
   <Route path="/shop/plants" element={<Plants />} />
-<Route path="/shop/plants/:slug" element={<PlantsCategory />} />
+  <Route path="/shop/plants/:slug" element={<PlantsCategory />} />
+  <Route path="/shop/accessories" element={<Accessories />} />
+<Route path="/shop/accessories/:slug" element={<AccessoriesCategory />} />
 
   <Route path="*" element={<Placeholder title="Page Not Found" />} />
 </Routes>

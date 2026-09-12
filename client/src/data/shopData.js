@@ -236,3 +236,39 @@ export function getPlantsProducts(subcategory) {
   }
   return products;
 }
+
+// Accessories — same bulk-import pattern
+const accessoriesImages = import.meta.glob(
+  "../assets/shop/accessories/*/*.{jpg,jpeg,png,webp}",
+  { eager: true, import: "default" }
+);
+
+function getAccessoriesImage(folder, prefix, index, ext = "jpg") {
+  const key = `../assets/shop/accessories/${folder}/${prefix}${index}.${ext}`;
+  return accessoriesImages[key];
+}
+
+export const accessoriesSubcategories = [
+  { slug: "books", name: "Books", folder: "books", prefix: "book" },
+  { slug: "decorative-storage", name: "Decorative Storage", folder: "decorativestorage", prefix: "decorativestorage" },
+  { slug: "kitchen-dining-accessories", name: "Kitchen & Dining Accessories", folder: "kitchen&diningaccessories", prefix: "kitchenaccessory" },
+  { slug: "tabletop-decor", name: "Tabletop Decor", folder: "tabletopdecor", prefix: "tabletopdecor" },
+];
+
+export function getAccessoriesProducts(subcategory) {
+  if (!subcategory.folder) return [];
+
+  const products = [];
+  for (let i = 1; i <= 10; i++) {
+    const image = getAccessoriesImage(subcategory.folder, subcategory.prefix, i);
+    if (!image) continue;
+
+    products.push({
+      id: `${subcategory.slug}-${i}`,
+      name: `${subcategory.name.split(" ")[0]} Design ${String(i).padStart(2, "0")}`,
+      price: 20 + i * 6,
+      image,
+    });
+  }
+  return products;
+}
