@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { rooms, styles } from "../data/portfolioData";
+import { useCart } from "../context/CartContext";
 
 export default function Navbar() {
   const [portfolioOpen, setPortfolioOpen] = useState(false);
+  const { cartCount } = useCart();
 
   return (
     <header className="sticky top-0 bg-cream/90 backdrop-blur-sm border-b border-stone z-50">
@@ -59,6 +61,36 @@ export default function Navbar() {
               </div>
             )}
           </div>
+
+          <Link to="/shop" className="hover:text-blushDark transition-colors">
+            Shop
+          </Link>
+
+          <Link
+            to="/cart"
+            className="relative flex items-center hover:text-blushDark transition-colors normal-case"
+            aria-label="View cart"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+            </svg>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-blushDark text-white text-[10px] leading-none rounded-full w-4 h-4 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </Link>
         </nav>
       </div>
     </header>

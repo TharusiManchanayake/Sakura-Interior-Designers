@@ -23,6 +23,7 @@ import Plants from "./pages/shop/Plants";
 import PlantsCategory from "./pages/shop/PlantsCategory";
 import Accessories from "./pages/shop/Accessories";
 import AccessoriesCategory from "./pages/shop/AccessoriesCategory";
+import Cart from "./pages/Cart";
 
 
 function Placeholder({ title }) {
@@ -49,7 +50,6 @@ function App() {
  
   <Route path="/services" element={<Services />} />
   <Route path="/booking" element={<Booking />} />
-  <Route path="/cart" element={<Placeholder title="Cart" />} />
   <Route path="/account" element={<Placeholder title="My Account" />} />
   <Route path="/find-my-style" element={<Placeholder title="Find My Style" />} />
   <Route path="/designers" element={<Designers />} />
@@ -60,9 +60,6 @@ function App() {
   <Route path="/shop/lighting/:slug" element={<LightingCategory />} />
   <Route path="/shop/decor" element={<Decor />} />
   <Route path="/shop/decor/:slug" element={<DecorCategory />} />
-  <Route path="/shop/:category" element={<Placeholder title="Coming Soon" />} />
-  <Route path="/shop/textiles" element={<Textiles />} />
-  <Route path="/shop/textiles/:slug" element={<TextilesCategory />} />
   <Route path="/shop/textiles" element={<Textiles />} />
   <Route path="/shop/textiles/:slug" element={<TextilesCategory />} />
   <Route path="/shop/wall-decor" element={<WallDecor />} />
@@ -70,7 +67,9 @@ function App() {
   <Route path="/shop/plants" element={<Plants />} />
   <Route path="/shop/plants/:slug" element={<PlantsCategory />} />
   <Route path="/shop/accessories" element={<Accessories />} />
-<Route path="/shop/accessories/:slug" element={<AccessoriesCategory />} />
+  <Route path="/shop/accessories/:slug" element={<AccessoriesCategory />} />
+  <Route path="/cart" element={<Cart />} />
+  <Route path="/shop/:category" element={<Placeholder title="Coming Soon" />} />
 
   <Route path="*" element={<Placeholder title="Page Not Found" />} />
 </Routes>

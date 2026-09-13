@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { furnitureSubcategories, getFurnitureProducts } from "../../data/shopData";
+import { useCart } from "../../context/CartContext";
 
 export default function FurnitureCategory() {
   const { slug } = useParams();
   const subcategory = furnitureSubcategories.find((s) => s.slug === slug);
+  const { addToCart } = useCart();
+  const [addedId, setAddedId] = useState(null);
 
   if (!subcategory) {
     return (
@@ -17,6 +21,12 @@ export default function FurnitureCategory() {
   }
 
   const products = getFurnitureProducts(subcategory);
+
+  function handleAddToCart(product) {
+    addToCart(product, 1);
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1500);
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-16">
@@ -39,7 +49,13 @@ export default function FurnitureCategory() {
                 />
               </div>
               <p className="font-semibold">{product.name}</p>
-              <p className="text-sm text-stone-600">${product.price}</p>
+              <p className="text-sm text-stone-600 mb-3">${product.price}</p>
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="w-full border border-charcoal text-charcoal text-xs uppercase tracking-wide py-2 hover:bg-charcoal hover:text-cream transition-colors"
+              >
+                {addedId === product.id ? "Added ✓" : "Add to Cart"}
+              </button>
             </div>
           ))}
         </div>
