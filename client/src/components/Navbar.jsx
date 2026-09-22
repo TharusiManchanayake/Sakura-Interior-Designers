@@ -66,6 +66,10 @@ export default function Navbar() {
             Shop
           </Link>
 
+          <Link to="/reviews" className="hover:text-blushDark transition-colors">
+            Reviews
+          </Link>
+
           <Link
             to="/cart"
             className="relative flex items-center hover:text-blushDark transition-colors normal-case"

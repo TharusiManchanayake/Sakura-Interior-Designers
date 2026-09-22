@@ -91,9 +91,12 @@ export default function Cart() {
         <div className="text-right">
           <p className="text-sm text-stone-600 mb-1">Subtotal</p>
           <p className="text-2xl font-bold mb-4">${cartTotal.toFixed(2)}</p>
-          <button className="bg-charcoal text-cream px-6 py-3 text-sm uppercase tracking-wide hover:bg-blushDark transition-colors">
+          <Link
+            to="/checkout"
+            className="inline-block bg-charcoal text-cream px-6 py-3 text-sm uppercase tracking-wide hover:bg-blushDark transition-colors"
+          >
             Checkout
-          </button>
+          </Link>
         </div>
       </div>
     </div>

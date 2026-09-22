@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Portfolio from "./pages/Portfolio";
@@ -24,57 +25,88 @@ import PlantsCategory from "./pages/shop/PlantsCategory";
 import Accessories from "./pages/shop/Accessories";
 import AccessoriesCategory from "./pages/shop/AccessoriesCategory";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import OrderStatus from "./pages/OrderStatus";
+import Reviews from "./pages/Reviews";
 
-
-function Placeholder({ title }) {
+function Placeholder({ title, message = "Coming in a later phase." }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-24 text-center">
       <h1 className="text-3xl font-bold">{title}</h1>
-      <p className="text-stone-600 mt-2">Coming in a later phase.</p>
+      <p className="text-stone-600 mt-2">{message}</p>
     </div>
   );
+}
+
+// Scrolls to the top whenever the page (route) changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 }
 
 function App() {
   return (
     <div>
       <Navbar />
+      <ScrollToTop />
 
-     <Routes>
-  <Route path="/" element={<Home />} />
-  <Route path="/portfolio" element={<Portfolio />} />
-  <Route path="/portfolio/room/:slug" element={<ByRoom />} />
-  <Route path="/portfolio/style/:slug" element={<ByStyle />} />
-  <Route path="/about" element={<About />} />
+      <Routes>
+        {/* Main pages */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/designers" element={<Designers />} />
+        <Route path="/account" element={<Placeholder title="My Account" />} />
+        <Route path="/find-my-style" element={<Placeholder title="Find My Style" />} />
 
- 
-  <Route path="/services" element={<Services />} />
-  <Route path="/booking" element={<Booking />} />
-  <Route path="/account" element={<Placeholder title="My Account" />} />
-  <Route path="/find-my-style" element={<Placeholder title="Find My Style" />} />
-  <Route path="/designers" element={<Designers />} />
-  <Route path="/shop" element={<Shop />} />
-  <Route path="/shop/furniture" element={<Furniture />} />
-  <Route path="/shop/furniture/:slug" element={<FurnitureCategory />} />
-  <Route path="/shop/lighting" element={<Lighting />} />
-  <Route path="/shop/lighting/:slug" element={<LightingCategory />} />
-  <Route path="/shop/decor" element={<Decor />} />
-  <Route path="/shop/decor/:slug" element={<DecorCategory />} />
-  <Route path="/shop/textiles" element={<Textiles />} />
-  <Route path="/shop/textiles/:slug" element={<TextilesCategory />} />
-  <Route path="/shop/wall-decor" element={<WallDecor />} />
-  <Route path="/shop/wall-decor/:slug" element={<WallDecorCategory />} />
-  <Route path="/shop/plants" element={<Plants />} />
-  <Route path="/shop/plants/:slug" element={<PlantsCategory />} />
-  <Route path="/shop/accessories" element={<Accessories />} />
-  <Route path="/shop/accessories/:slug" element={<AccessoriesCategory />} />
-  <Route path="/cart" element={<Cart />} />
-  <Route path="/shop/:category" element={<Placeholder title="Coming Soon" />} />
+        {/* Portfolio */}
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/portfolio/room/:slug" element={<ByRoom />} />
+        <Route path="/portfolio/style/:slug" element={<ByStyle />} />
 
-  <Route path="*" element={<Placeholder title="Page Not Found" />} />
-</Routes>
+        {/* Shop */}
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/furniture" element={<Furniture />} />
+        <Route path="/shop/furniture/:slug" element={<FurnitureCategory />} />
+        <Route path="/shop/lighting" element={<Lighting />} />
+        <Route path="/shop/lighting/:slug" element={<LightingCategory />} />
+        <Route path="/shop/decor" element={<Decor />} />
+        <Route path="/shop/decor/:slug" element={<DecorCategory />} />
+        <Route path="/shop/textiles" element={<Textiles />} />
+        <Route path="/shop/textiles/:slug" element={<TextilesCategory />} />
+        <Route path="/shop/wall-decor" element={<WallDecor />} />
+        <Route path="/shop/wall-decor/:slug" element={<WallDecorCategory />} />
+        <Route path="/shop/plants" element={<Plants />} />
+        <Route path="/shop/plants/:slug" element={<PlantsCategory />} />
+        <Route path="/shop/accessories" element={<Accessories />} />
+        <Route path="/shop/accessories/:slug" element={<AccessoriesCategory />} />
+        <Route path="/shop/:category" element={<Placeholder title="Coming Soon" />} />
+        <Route path="/reviews" element={<Reviews />} />
+
+        {/* Cart & checkout */}
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/order/:orderId" element={<OrderStatus />} />
+
+        {/* 404 (must stay last) */}
+        <Route
+          path="*"
+          element={
+            <Placeholder
+              title="Page Not Found"
+              message="That page doesn't exist."
+            />
+          }
+        />
+      </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

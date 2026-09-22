@@ -2,11 +2,13 @@ import { useParams, Link } from "react-router-dom";
 import { rooms } from "../../data/portfolioData";
 import { roomContent } from "../../data/roomContent";
 import ContentBlocks from "../../components/ContentBlocks";
+import { getRoomHero } from "../../data/heroImages";
 
 export default function ByRoom() {
   const { slug } = useParams();
   const room = rooms.find((r) => r.slug === slug);
   const content = roomContent[slug];
+  const hero = getRoomHero(slug);
 
   // Slug doesn't exist at all (bad URL)
   if (!room) {
@@ -37,14 +39,16 @@ export default function ByRoom() {
   // Full rich content page
   return (
     <div>
-      {/* Hero */}
-      <div className="aspect-[12/5] w-full overflow-hidden">
-        <img
-          src={content.heroImage}
-          alt={content.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
+      {/* Hero (only shown when a matching image exists, e.g. bedroomhero.jpg) */}
+      {hero && (
+        <div className="max-w-5xl mx-auto px-6 pt-10">
+          <img
+            src={hero}
+            alt={content.title}
+            className="w-full h-auto max-h-[70vh] object-cover rounded-sm"
+          />
+        </div>
+      )}
 
       <div className="max-w-3xl mx-auto px-6 py-16">
         <p className="text-sm uppercase tracking-widest text-blushDark mb-2">
