@@ -1,5 +1,5 @@
 // Very small file-based order store (server/data/orders.json).
-// Fine for development and a small shop. For a busy shop, swap these three
+// Fine for development and a small shop. For a busy shop, swap these
 // functions for a real database (PostgreSQL, MongoDB, etc.); nothing else changes.
 
 import fs from "node:fs";
@@ -42,4 +42,9 @@ export function updateOrder(id, patch) {
   orders[id] = { ...orders[id], ...patch, updatedAt: new Date().toISOString() };
   save();
   return orders[id];
+}
+
+// Newest first. Used by the admin orders screen.
+export function listOrders() {
+  return Object.values(orders).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }

@@ -29,6 +29,7 @@ import Checkout from "./pages/Checkout";
 import OrderStatus from "./pages/OrderStatus";
 import Reviews from "./pages/Reviews";
 import FindMyStyle from "./pages/FindMyStyle";
+import Admin from "./pages/Admin";
 
 function Placeholder({ title, message = "Coming in a later phase." }) {
   return (
@@ -51,10 +52,15 @@ function ScrollToTop() {
 }
 
 function App() {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
+
   return (
     <div>
-      <Navbar />
+      {!isAdmin && <Navbar />}
       <ScrollToTop />
+
+      <Routes></Routes>
 
       <Routes>
         {/* Main pages */}
@@ -94,6 +100,8 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order/:orderId" element={<OrderStatus />} />
         <Route path="/find-my-style" element={<FindMyStyle />} />
+
+        <Route path="/admin" element={<Admin />} />
 
         {/* 404 (must stay last) */}
         <Route

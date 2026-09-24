@@ -5,6 +5,8 @@ import crypto from "node:crypto";
 import { getProduct } from "./catalog.js";
 import { createOrder, getOrder, updateOrder } from "./store.js";
 import reviewsRouter from "./reviews.js";
+import { login, logout, requireAdmin } from "./adminAuth.js";
+import adminRouter from "./adminRoutes.js";
 
 const {
   PORT = 5000,
@@ -33,6 +35,12 @@ app.use(cors({ origin: CLIENT_URL }));
 app.use(express.json({ limit: "50kb" }));
 app.use(express.urlencoded({ extended: false })); // PayHere notifications arrive as form data
 app.use("/api/reviews", reviewsRouter);
+
+// Admin: login is open (it checks the password itself); everything else
+// under /api/admin requires a valid session token.
+app.post("/api/admin/login", login);
+app.post("/api/admin/logout", requireAdmin, logout);
+app.use("/api/admin", requireAdmin, adminRouter);
 
 /* ---------------- helpers ---------------- */
 
@@ -111,7 +119,7 @@ function parseOrderInput(body) {
   return { errors, data: { customer, shippingAddress, paymentMethod, items } };
 }
 
-// What the browser is allowed to see about an order
+// What the browser is allowed to see about an order (the public confirmation page)
 const publicOrder = (o) => ({
   id: o.id,
   status: o.status,
@@ -124,6 +132,7 @@ const publicOrder = (o) => ({
   shippingCost: o.shippingCost,
   total: o.total,
   currency: o.currency,
+  fulfillmentStatus: o.fulfillmentStatus,
 });
 
 /* ---------------- routes ---------------- */
@@ -159,6 +168,7 @@ app.post("/api/orders", (req, res) => {
     id,
     createdAt: new Date().toISOString(),
     status: data.paymentMethod === "cod" ? "cod" : "pending",
+    fulfillmentStatus: "unfulfilled", // separate from payment status; updated from the admin page
     paymentMethod: data.paymentMethod,
     customer: data.customer,
     shippingAddress: data.shippingAddress,
@@ -280,4 +290,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Sakura server running on http://localhost:${PORT}`);
   console.log(`PayHere: ${payhereConfigured ? PAYHERE_MODE : "NOT CONFIGURED (online payment disabled)"}`);
+  console.log(`Admin login: ${process.env.ADMIN_PASSWORD ? "configured" : "NOT CONFIGURED (set ADMIN_PASSWORD in .env)"}`);
 });
