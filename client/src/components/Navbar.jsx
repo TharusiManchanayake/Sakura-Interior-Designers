@@ -70,6 +70,10 @@ export default function Navbar() {
             Reviews
           </Link>
 
+          <Link to="/find-my-style" className="hover:text-blushDark transition-colors">
+            Find My Style
+          </Link>
+
           <Link
             to="/cart"
             className="relative flex items-center hover:text-blushDark transition-colors normal-case"

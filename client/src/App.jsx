@@ -28,6 +28,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderStatus from "./pages/OrderStatus";
 import Reviews from "./pages/Reviews";
+import FindMyStyle from "./pages/FindMyStyle";
 
 function Placeholder({ title, message = "Coming in a later phase." }) {
   return (
@@ -63,7 +64,6 @@ function App() {
         <Route path="/booking" element={<Booking />} />
         <Route path="/designers" element={<Designers />} />
         <Route path="/account" element={<Placeholder title="My Account" />} />
-        <Route path="/find-my-style" element={<Placeholder title="Find My Style" />} />
 
         {/* Portfolio */}
         <Route path="/portfolio" element={<Portfolio />} />
@@ -93,6 +93,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/order/:orderId" element={<OrderStatus />} />
+        <Route path="/find-my-style" element={<FindMyStyle />} />
 
         {/* 404 (must stay last) */}
         <Route
