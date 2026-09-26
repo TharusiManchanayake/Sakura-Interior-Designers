@@ -4,7 +4,7 @@ import { styleContent } from "../data/styleContent";
 
 export default function Home() {
   // Pick a few styles to feature on the homepage
-  const featuredSlugs = ["japandi", "art-deco", "coastal", "minimalist"];
+  const featuredSlugs = ["modern", "art-deco", "japandi", "coastal"];
   const featured = featuredSlugs
     .map((slug) => ({ slug, ...styleContent[slug] }))
     .filter((s) => s.title); // skip any not yet written

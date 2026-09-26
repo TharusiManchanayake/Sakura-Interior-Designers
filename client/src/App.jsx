@@ -60,8 +60,6 @@ function App() {
       {!isAdmin && <Navbar />}
       <ScrollToTop />
 
-      <Routes></Routes>
-
       <Routes>
         {/* Main pages */}
         <Route path="/" element={<Home />} />
