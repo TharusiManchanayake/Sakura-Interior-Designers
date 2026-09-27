@@ -2,13 +2,11 @@ import { useParams, Link } from "react-router-dom";
 import { styles } from "../../data/portfolioData";
 import { styleContent } from "../../data/styleContent";
 import ContentBlocks from "../../components/ContentBlocks";
-import { getStyleHero } from "../../data/heroImages";
 
 export default function ByStyle() {
   const { slug } = useParams();
   const style = styles.find((s) => s.slug === slug);
   const content = styleContent[slug];
-  const hero = getStyleHero(slug);
 
   // Slug doesn't exist at all (bad URL)
   if (!style) {
@@ -36,20 +34,9 @@ export default function ByStyle() {
     );
   }
 
-  // Full rich content page
+  // Full rich content page (no hero banner; each section shows its own photo)
   return (
     <div>
-      {/* Hero (only shown when a matching image exists, e.g. japandihero.jpg) */}
-      {hero && (
-        <div className="aspect-[12/5] w-full overflow-hidden">
-          <img
-            src={hero}
-            alt={content.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
-      )}
-
       <div className="max-w-3xl mx-auto px-6 py-16">
         <p className="text-sm uppercase tracking-widest text-sage mb-2">
           By Style
@@ -77,11 +64,11 @@ export default function ByStyle() {
             </h2>
 
             {section.image && (
-              <div className="aspect-[8/5] overflow-hidden rounded-sm mb-6">
+              <div className="mb-6 bg-white rounded-sm overflow-hidden">
                 <img
                   src={section.image}
                   alt={section.heading}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto max-h-[520px] object-contain mx-auto"
                 />
               </div>
             )}

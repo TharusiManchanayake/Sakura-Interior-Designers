@@ -92,6 +92,8 @@ import midCentury3 from "../assets/portfolio/midcentury_modern/midcentury_modern
 import midCentury4 from "../assets/portfolio/midcentury_modern/midcentury_modern4.jpg";
 import midCentury5 from "../assets/portfolio/midcentury_modern/midcentury_modern5.jpg";
 import midCentury6 from "../assets/portfolio/midcentury_modern/midcentury_modern6.jpg";
+import midCentury7 from "../assets/portfolio/midcentury_modern/midcentury_modern7.jpg";
+import midCentury8 from "../assets/portfolio/midcentury_modern/midcentury_modern8.jpg";
 
 
 import minimalist1 from "../assets/portfolio/minimalist/minimalist1.jpg";
@@ -3399,7 +3401,7 @@ export const styleContent = {
   ]
 },
 
-"mid-century-modern": {
+"midcentury-modern": {
   title: "Mid-Century Modern",
   tagline: "Timeless Design, Modern Living",
   intro:
@@ -3850,6 +3852,7 @@ export const styleContent = {
 
     {
       heading: "07. Patterns, Artwork & Accessories",
+      image: midCentury7,
       blocks: [
         {
           type: "text",
@@ -3922,6 +3925,7 @@ export const styleContent = {
 
     {
       heading: "08. Modern Mid-Century — Sakura Interior Designers",
+      image: midCentury8,
       blocks: [
         {
           type: "text",
