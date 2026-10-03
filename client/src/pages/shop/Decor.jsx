@@ -34,6 +34,10 @@ export default function Decor() {
           );
         })}
       </div>
-    </div>
+       <Link to="/shop" className="text-charcoal underline mt-16 inline-block">
+        ← Back to Shop
+      </Link>
+      </div>
+    
   );
 }

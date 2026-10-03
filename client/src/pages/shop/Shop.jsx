@@ -20,6 +20,10 @@ export default function Shop() {
           </Link>
         ))}
       </div>
+      <br></br>
+       <Link to="/" className="text-sm text-stone-600 hover:text-blushDark underline">
+      ← Back to Home
+      </Link>
     </div>
   );
 }
