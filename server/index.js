@@ -31,9 +31,20 @@ const PAYHERE_URL =
 const payhereConfigured = Boolean(PAYHERE_MERCHANT_ID && PAYHERE_MERCHANT_SECRET);
 
 const app = express();
-app.use(cors({ origin: CLIENT_URL }));
-app.use(express.json({ limit: "50kb" }));
-app.use(express.urlencoded({ extended: false })); // PayHere notifications arrive as form data
+
+app.use(
+  cors({
+    origin: [
+      "https://sakura-interior-designers.vercel.app",
+      "http://localhost:5173",
+    ],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-admin-password"],
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // PayHere notifications arrive as form data
+
 app.use("/api/reviews", reviewsRouter);
 
 // Admin: login is open (it checks the password itself); everything else
