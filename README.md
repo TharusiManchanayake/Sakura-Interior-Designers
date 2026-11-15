@@ -1,6 +1,6 @@
 # 🌸 Sakura Interior Designers
 
-An e-commerce website for a interior design studio, built as an undergraduate project. Sakura Interiors combines an editorial-style design portfolio, a full product catalogue with cart and checkout, designer profiles, customer reviews, and a consultation booking flow in one experience.
+An e-commerce website for a fictional interior design studio, built as an undergraduate project. Sakura Interiors combines an editorial-style design portfolio, a full product catalogue with cart and checkout, designer profiles, customer reviews, and a consultation booking flow in one experience.
 
 **🔗 Live demo:** [sakura-interior-designers.vercel.app](https://sakura-interior-designers.vercel.app)
 
