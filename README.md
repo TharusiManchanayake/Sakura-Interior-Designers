@@ -118,12 +118,6 @@ CLIENT_URL=http://localhost:5173
 
 ---
 
-## 📸 Screenshots
-
-_Add screenshots of the homepage, a style page, the shop, and the checkout here._
-
----
-
 ## 👩‍💻 Author
 
 **Tharusi Manchanayake**
